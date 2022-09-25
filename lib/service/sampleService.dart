@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:crud_operations/model/components/sampleComponents.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import '../controller/sampleController.dart';
 import '../model/sampleModel.dart';
 
 class SampleServices {
+  final SampleController sampleCont = Get.put(SampleController());
   Future<List<Sample>> getApi() async {
     var url = UrlSchemes.baseUrl + UrlSchemes.todosUrl;
     var response = await http.get(Uri.parse(url));
@@ -24,14 +27,14 @@ class SampleServices {
   Future<List<Sample>?> postApi() async {
     var url = Uri.parse(UrlSchemes.baseUrl + UrlSchemes.todosUrl);
     var response = await http.post(url, body: {
-      "title": "hassan2 13",
-      "description": "description 13",
-      "category": "category 13",
-      "timestamp": 1663825779.toString(),
-      "priority": 69.toString(),
-      "user_id": "user_id 13",
-      "isCompleted": "false",
-      "id": "13"
+      "title": sampleCont.titleController.text.toString(),
+      "description": sampleCont.descriptionController.text.toString(),
+      "category": sampleCont.categoryController.text.toString(),
+      "timestamp": sampleCont.timestampController.text.toString(),
+      "priority": sampleCont.priorityController.text.toString(),
+      "user_id": sampleCont.userIDController.text.toString(),
+      "isCompleted": sampleCont.isCompletedController.text.toString(),
+      "id": sampleCont.idController.text.toString(),
     });
   }
   // Future<List<Sample>?> deleteApi(id) async {

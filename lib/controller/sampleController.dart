@@ -9,8 +9,15 @@ class SampleController extends GetxController {
   var Data = <Sample>[].obs;
   var updatedData = <Sample>[].obs;
   var selected_index = 0.obs;
-  var idController = TextEditingController().obs;
-  var titleController = TextEditingController().obs;
+  TextEditingController idController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController timestampController = TextEditingController();
+  TextEditingController priorityController = TextEditingController();
+  TextEditingController userIDController = TextEditingController();
+  TextEditingController isCompletedController = TextEditingController();
+
   RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   @override
@@ -18,9 +25,30 @@ class SampleController extends GetxController {
     getData();
     // TODO: implement onInit
     super.onInit();
+    // idController.addListener(printID());
+    }
+
+  void onClose() {
+    super.onClose();
   }
 
+  void onSavePressed(String id,String text) {
+    id = idController.text;
+    text = titleController.text;
+  }
 
+  void onAdding(String id, String title, String description, String category,
+      String timestamp, String priority, String userID, String isCompleted) {
+    id = idController.text;
+    title = idController.text;
+    description = descriptionController.text;
+    category = categoryController.text;
+    timestamp = timestampController.text;
+    priority = priorityController.text;
+    userID = userIDController.text;
+    isCompleted = isCompletedController.text;
+
+  }
 
   Future<List<Sample>?> getData() async {
     var result = await SampleServices().getApi();
@@ -28,6 +56,8 @@ class SampleController extends GetxController {
     isLoading.value = false;
     return result;
   }
+
+
 
   // Future<List<Sample>?> putData() async {
   //   var newResult = await SampleServices().putApi(
@@ -40,10 +70,10 @@ class SampleController extends GetxController {
   //   isLoading.value = false;
   //   return newResult;
   // }
-  void _onLoading() async {
-    // your api here
-    _refreshController.loadComplete();
-  }
+  // void _onLoading() async {
+  //   // your api here
+  //   _refreshController.loadComplete();
+  // }
 
 // Future<List<Sample>?> deleteData(id)  async {
 //   var after_delete = await SampleServices().deleteApi(id);

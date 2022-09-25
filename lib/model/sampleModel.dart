@@ -3,7 +3,7 @@
 //     final sample = sampleFromJson(jsonString);
 import 'dart:convert';
 
-List<Sample> sampleFromJson(String str) => List<Sample>.from(json.decode(str).map((x) => Sample.fromJson(x)));
+List<Sample> sampleFromJson(dynamic str) => List<Sample>.from(json.decode(str).map((x) => Sample.fromJson(x)));
 
 String sampleToJson(List<Sample> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

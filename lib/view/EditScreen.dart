@@ -12,58 +12,75 @@ class EditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: GestureDetector(
-            child: Icon(Icons.arrow_back_ios),
-            onTap: () => Get.back(),
-          ),
-          title: Text(
-            "Edit Screen",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
+      appBar: AppBar(
+        leading: GestureDetector(
+          child: Icon(Icons.arrow_back_ios),
+          onTap: () {
+            Get.back();
+            sampleCont.idController.text = "";
+            sampleCont.titleController.text = "";
+          },
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ListView.builder(
-              padding: EdgeInsets.only(left: 15, right: 15, top: 30),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    TextFormField(
-                      controller: sampleCont.idController.value,
-                      decoration: InputDecoration(
-                          hintText:
-                              "${sampleCont.Data.value[sampleCont.selected_index.value].id}"),
-                    ),
-                    TextFormField(
-                      controller: sampleCont.titleController.value,
-                      decoration: InputDecoration(
-                          hintText:
-                              "${sampleCont.Data.value[sampleCont.selected_index.value].title}"),
-                    ),
-                  ],
+        title: Text(
+          "Edit Screen",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ListView.builder(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 30),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  TextFormField(
+                    controller: sampleCont.idController,
+                    decoration: InputDecoration(
+                        hintText:
+                            "${sampleCont.Data.value[sampleCont.selected_index.value].id}"),
+                  ),
+                  TextFormField(
+                    controller: sampleCont.titleController,
+                    decoration: InputDecoration(
+                        hintText:
+                            "${sampleCont.Data.value[sampleCont.selected_index.value].title}"),
+                  ),
+                ],
+              );
+            },
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                sampleCont.onSavePressed(
+                  "${sampleCont.Data.value[sampleCont.selected_index.value].id}",
+                  "${sampleCont.Data.value[sampleCont.selected_index.value].title}",
                 );
-              },
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  print("____________________________________________________________");
-                  print(sampleCont.updatedData.value);
+                if (sampleCont.Data.value[sampleCont.selected_index.value].id !=
+                    sampleCont.idController.text.toString()) {
+                  Get.snackbar("Data Not Found !", "Entered ID doesn't exist.");
+                }
+                // print("${sampleCont.idController.text.toString()}");
+                else {
                   SampleServices().putApi(
-                      "23",
-                      "muhib refresh",);
-                },
-                child: Text("Save"))
-          ],
-        ));
+                    "${sampleCont.idController.text.toString()}",
+                    "${sampleCont.titleController.text.toString()}",
+                  );
+                  Get.snackbar("Task Editted !",
+                      "Task with ID ${sampleCont.idController.text.toString()} editted !");
+                }
+              },
+              child: Text("Save"))
+        ],
+      ),
+    );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:crud_operations/view/AddTask.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -34,7 +36,29 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text("Todo App"),),
+        appBar: AppBar(
+          title: Center(
+            child: Text(
+              "Todo App",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          actions: [
+            GestureDetector(
+              child: Container(
+                child: Icon(Icons.add),
+                margin: EdgeInsets.only(right: 15),
+              ),
+              onTap: () {
+                // Get.to(addTask());
+                Get.to(addTask());
+              },
+            )
+          ],
+        ),
         body: SmartRefresher(
           enablePullDown: true,
           controller: _refreshController,
