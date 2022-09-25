@@ -22,7 +22,7 @@ class EditScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          "Edit Screen",
+          "Edit Task",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),

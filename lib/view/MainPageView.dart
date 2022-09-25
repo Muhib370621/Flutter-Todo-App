@@ -1,10 +1,7 @@
 import 'package:crud_operations/view/EditScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import '../controller/sampleController.dart';
-import '../model/sampleModel.dart';
 import '../service/sampleService.dart';
 
 class MainPageView extends StatelessWidget {
@@ -21,6 +18,7 @@ class MainPageView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ListView.builder(
+              padding: EdgeInsets.all(15),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),

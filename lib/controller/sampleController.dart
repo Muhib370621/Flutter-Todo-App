@@ -59,6 +59,8 @@ class SampleController extends GetxController {
 
 
 
+
+
   // Future<List<Sample>?> putData() async {
   //   var newResult = await SampleServices().putApi(
   //     idController.value.toString(),

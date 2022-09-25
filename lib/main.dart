@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
 
   void _onRefresh() async {
     // your api here
-    _refreshController.refreshCompleted();
     sampleCont.getData();
+    _refreshController.refreshCompleted();
   }
 
   void _onLoading() async {
